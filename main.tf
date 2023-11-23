@@ -21,6 +21,13 @@ module "vpc-network" {
     tags = var.common_tags
 
 }
+module "ec2_instance_sg" {
+  source = "./modules/security_group"
+  name = var.name
+  port_list = var.port_list
+  vpc_id = module.vpc-network.vpc_id
+  tags = var.common_tags
+}
 module "instance" {
     #The count will `instance_count` # of instances. Set this in the terraform.tfvar file
     count = var.instance_count 
@@ -34,4 +41,5 @@ module "instance" {
     key_name = var.key_name
     port_list = var.port_list
     tags = var.common_tags
+    security_group_ids = [module.ec2_instance_sg.security_group_id]
 }

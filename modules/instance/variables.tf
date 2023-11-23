@@ -34,3 +34,7 @@ variable "tags" {
   description = "Instance Tags"
  
 }
+variable "security_group_ids" {
+    type = list(string)
+    description = "Instance Security Groups"
+}
