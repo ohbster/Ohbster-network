@@ -3,6 +3,7 @@ resource "aws_security_group" "sg" {
     name = var.name
     description = "Allow port 80"
     vpc_id = var.vpc_id
+    tags = merge(var.tags,{Name = var.name})
 }
 resource "aws_vpc_security_group_ingress_rule" "ingress" {
     count = length(var.port_list)
