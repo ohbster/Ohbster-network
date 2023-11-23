@@ -26,4 +26,9 @@ It should run just like that. If you want to make changes you don't need to touc
    ![image](https://github.com/ohbster/Ohbster-network/assets/96074979/d733460d-b84c-4eec-8543-b0312f6cc85d)
   3) Save the terraform.tfvars file and do a `terraform apply`
 
+That is all you should need to change for most circumstances. Just those 9 settings. If you want multiple networks in multiple regions, you can use:  
+`terraform workspace`  
+to avoid maintain multiple states.  
 
+Please send any feedback to Obijah - ohbster@protonmail.com  
+Thanks and happy coding  
