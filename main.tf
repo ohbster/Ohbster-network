@@ -15,15 +15,17 @@ module "vpc-network" {
     source = "./modules/network"
     region = var.region
     cidr = var.cidr
-    public_subnet_count = 3
-    private_subnet_count = 3
+    public_subnet_count = var.public_subnet_count
+    private_subnet_count = var.private_subnet_count
 
 }
 module "instance" {
+    #The count will `instance_count` # of instances. Set this in the terraform.tfvar file
     count = var.instance_count 
     source = "./modules/instance"
-    name = "${var.name}-instance-${count.index + 1}"
-    subnet_id = module.vpc-network.public_subnet_ids[count.index % module.vpc-network.public_subnet_count]
+    name = "${var.name}-instance-${count.index + 1}" #This will add the number of isntance to the name
+    #This will evenly distribute instances in the available public subnets
+    subnet_id = module.vpc-network.public_subnet_ids[count.index % module.vpc-network.public_subnet_count] 
     vpc_id = module.vpc-network.vpc_id
     user_data = var.user_data
     instance_type = var.instance_type

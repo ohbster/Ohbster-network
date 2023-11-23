@@ -47,11 +47,13 @@ variable "instance_count" {
 
     }
 }
-
+#user data file
 variable "user_data" {
     type = string
     description = "Main instance user data"
+    default = "sample_userdata_debian.sh"
 }
+
 variable "instance_type" {
     type = string
     description = "Main instance type"
@@ -62,7 +64,7 @@ variable "key_name" {
     type = string
     description = "Main instance key name"
 }
-
+#Open these ports to the instance security groups
 variable "port_list" {
     type = list(number)
     description = "Main instance port list"
