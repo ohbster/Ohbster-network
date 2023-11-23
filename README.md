@@ -15,7 +15,8 @@ How do you use it?
   - `terraform init`
   From there you can do  
   - `terraform apply`
-It should run just like that. If you want to make changes you don't need to touch ANY terraform code. Make changes to the terraform.tfvars file and re-apply  
+It should run just like that. If you want to make changes you don't need to touch ANY terraform code. Make changes to the terraform.tfvars file and re-apply
+
 **WARNING IF YOU PLAN TO CHANGE REGION YOU MUST DO `terraform destroy` FIRST OR IT WILL OVERWRITE YOUR STATE FILE!!**  
   If this happens, you will need to manually destroy every resource in every region you applied since your last destroy.  
   This is not fun and is not cheap. I am looking at ways to avoid this.
