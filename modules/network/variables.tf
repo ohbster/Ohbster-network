@@ -20,8 +20,3 @@ variable "private_subnet_count" {
   description = "Number of private subnets to create"
 }
 
-#DELETEME
-# variable "port_list" {
-#   type = list(number)
-#   description = "List of open ingress ports"
-# }
