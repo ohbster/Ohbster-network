@@ -20,7 +20,8 @@ It should run just like that. If you want to make changes you don't need to touc
   If this happens, you will need to manually destroy every resource in every region you applied since your last destroy.  
   This is not fun and is not cheap. I am looking at ways to avoid this.
   1) Open the file, terraform.tfvars
-  2) Edit the settings in this file ![image](https://github.com/ohbster/Ohbster-network/assets/96074979/d733460d-b84c-4eec-8543-b0312f6cc85d)
+  2) Edit the settings in this file
+   ![image](https://github.com/ohbster/Ohbster-network/assets/96074979/d733460d-b84c-4eec-8543-b0312f6cc85d)
   3) Save the terraform.tfvars file and do a `terraform apply`
 
 
