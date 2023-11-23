@@ -19,4 +19,7 @@ variable "private_subnet_count" {
   type = number
   description = "Number of private subnets to create"
 }
-
+variable "tags" {
+  type = map(string)
+  description = "Network Tags"
+}

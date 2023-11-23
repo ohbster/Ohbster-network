@@ -7,6 +7,12 @@
 name = "Ohbster-Network"
 #Set the region for the project
 region = "us-west-1"
+#common tags to apply to resources
+common_tags = {
+        Environment = "dev"
+        Version = ".1"
+        Owner = "ohbster@protonmail.com"
+}
 
 #######
 #Network Settings
@@ -15,7 +21,7 @@ region = "us-west-1"
 cidr = "10.51.0.0/16"
 #The number of public subnets
 public_subnet_count = 3
-#The number of private subnes
+#The number of private subnets
 private_subnet_count = 3
 
 #######

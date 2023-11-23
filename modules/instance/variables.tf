@@ -28,3 +28,9 @@ variable "port_list" {
     type = list(number)
     description = "List of ports to open in security group"
 }
+
+variable "tags" {
+  type = map(string)
+  description = "Instance Tags"
+ 
+}

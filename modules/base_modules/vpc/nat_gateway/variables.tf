@@ -10,3 +10,7 @@ variable "subnet_id" {
     type = string
     description = "NAT Gateway subnet id"
 }
+variable "tags" {
+  type = map(string)
+  description = "NAT Gateway Tags"
+}
