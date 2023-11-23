@@ -40,7 +40,7 @@ module "public-subnets" {
     cidr = cidrsubnet(module.vpc.cidr,8, count.index + 1)
     #using modulus in case there are more subnets than available AZ's 
     az = element(local.availability_zones, (count.index) % length(local.availability_zones)) 
-    tags = var.tags
+    tags = merge(var.tags,{Name = var.name})
 }
 ###
 #IGW and NAT

@@ -1,4 +1,4 @@
 resource "aws_eip" "nat" {
     vpc = var.vpc
-    tags = var.tags
+    tags = merge(var.tags,{Name = var.name})
 }

@@ -35,5 +35,5 @@ resource "aws_instance" "web" {
       http_tokens = "required"  
     }
     
-    tags = var.tags
+    tags = merge(var.tags,{Name = var.name})
 }
