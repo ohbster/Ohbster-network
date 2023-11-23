@@ -14,19 +14,13 @@ data "aws_ami" "ubuntu" {
   owners = ["099720109477"] # Canonical
 }
 
-module "ec2_instance_sg" {
-  source = "../security_group"
-  name = var.name
-  port_list = var.port_list
-  vpc_id = var.vpc_id
-  tags = var.tags
-}
+
 
 resource "aws_instance" "web" {
     ami = data.aws_ami.ubuntu.id 
     instance_type = var.instance_type
     subnet_id = var.subnet_id
-    security_groups = [module.ec2_instance_sg.security_group_id]
+    security_groups = var.security_group_ids
     associate_public_ip_address = true
     user_data = file("${var.user_data}")
     key_name = var.key_name
