@@ -7,3 +7,7 @@ variable "vpc" {
     description = "Elastic IP VPC"
     default = true
 }
+variable "tags" {
+  type = map(string)
+  description = "EIP Tags"
+}

@@ -12,3 +12,7 @@ variable "vpc_id" {
     type = string
     description = "Security Group Vpc Id"
 }
+variable "tags" {
+  type = map(string)
+  description = "Security Group Tags"
+}

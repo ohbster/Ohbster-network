@@ -7,7 +7,7 @@ variable "name" {
 
     validation {
       condition = can(regex("^[a-zA-Z][a-zA-Z0-9-]{3,20}",var.name))
-      error_message = "Invalid Username: Start with letter, only letters, numbers and '-'"
+      error_message = "Invalid name: Start with letter, only letters, numbers and '-'"
     }
 }
 
@@ -16,22 +16,45 @@ variable "region" {
     description = "Main vpc region"
 }
 
+variable "common_tags" {
+    type = map(string)
+    description = "Common Tags"
+    default = {
+        Environment = "dev"
+        Version = ".1"
+        Owner = "ohbster@protonmail.com"
+  }
+}
+
 ########
 #Network variables
 ########
 variable "cidr" {
     type = string
     description = "Main vpc cidr"
+    default = "10.10.0.0/16"
 }
 
 variable "public_subnet_count" {
     type = string
     description = "Main Public subnet count"
+    default = 1
+
+    validation {
+      condition = var.public_subnet_count > 0
+      error_message = "Enter a value greater than 0"
+    }
 }
 
 variable "private_subnet_count" {
     type = string
     description = "Main Private subnet count"
+    default = 1
+
+    validation {
+      condition = var.private_subnet_count > 0
+      error_message = "Enter a value greater than 0"
+    }
 }
 
 ########
@@ -40,6 +63,7 @@ variable "private_subnet_count" {
 variable "instance_count" {
     type = number
     description = "Main Instance count"
+    default = 1
 
     validation {
       condition = var.instance_count < 10
@@ -70,3 +94,4 @@ variable "port_list" {
     description = "Main instance port list"
     default = [80,22]
 }
+

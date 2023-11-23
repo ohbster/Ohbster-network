@@ -14,3 +14,7 @@ variable "cidr" {
     type = string
     description = "Subnet CIDR block"
 }
+variable "tags" {
+  type = map(string)
+  description = "Network Tags"
+}

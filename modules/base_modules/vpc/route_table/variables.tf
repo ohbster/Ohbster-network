@@ -16,3 +16,7 @@ variable "gateway_id" {
     description = "Route table internet gateway id"
     default = null
 }
+variable "tags" {
+  type = map(string)
+  description = "Route Table Tags"
+}

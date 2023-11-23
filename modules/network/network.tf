@@ -17,6 +17,7 @@ module "vpc" {
     source = "../base_modules/vpc/vpc"
     name = "${var.name}-vpc"
     cidr = var.cidr
+    tags = var.tags
 }
 module "private-subnets" {
     count = var.private_subnet_count
@@ -27,6 +28,7 @@ module "private-subnets" {
     cidr = cidrsubnet(module.vpc.cidr, 8, count.index + 11) 
     #using modulus in case there are more subnets than available AZ's 
     az = element(local.availability_zones, (count.index) % length(local.availability_zones)) 
+    tags = var.tags
 }
 #Should only need 1 public subnet.
 module "public-subnets" {
@@ -38,6 +40,7 @@ module "public-subnets" {
     cidr = cidrsubnet(module.vpc.cidr,8, count.index + 1)
     #using modulus in case there are more subnets than available AZ's 
     az = element(local.availability_zones, (count.index) % length(local.availability_zones)) 
+    tags = var.tags
 }
 ###
 #IGW and NAT
@@ -46,10 +49,12 @@ module "igw" {
     source = "../base_modules/vpc/igw"
     vpc_id = module.vpc.vpc_id
     name = "${var.name}-igw"
+    tags = var.tags
 }
 module "eip_nat" {
     source = "../base_modules/vpc/elastic_ip"
     name = "${var.name}-nat_eip"
+    tags = var.tags
 }
 module "nat_gateway" {
     source = "../base_modules/vpc/nat_gateway"
@@ -57,6 +62,7 @@ module "nat_gateway" {
     name = "${var.name}-nat"
     allocation_id = module.eip_nat.id
     depends_on = [ module.igw ]
+    tags = var.tags
 }
 ###
 #Routes
@@ -66,12 +72,14 @@ module "private_route_table" {
     name = "${var.name}-private"
     vpc_id = module.vpc.vpc_id
     nat_gateway_id = module.nat_gateway.id
+    tags = var.tags
 }
 module "public_route_table" {
     source = "../base_modules/vpc/route_table"
     name = "${var.name}-public"
     vpc_id = module.vpc.vpc_id
     gateway_id = module.igw.id
+    tags = var.tags
 }
 resource "aws_route_table_association" "private-subnets" {
     count = length(module.private-subnets)

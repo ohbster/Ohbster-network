@@ -19,6 +19,7 @@ module "ec2_instance_sg" {
   name = var.name
   port_list = var.port_list
   vpc_id = var.vpc_id
+  tags = var.tags
 }
 
 resource "aws_instance" "web" {
@@ -34,7 +35,5 @@ resource "aws_instance" "web" {
       http_tokens = "required"  
     }
     
-    tags = {
-        Name = "${var.name}"
-    }
+    tags = var.tags
 }
