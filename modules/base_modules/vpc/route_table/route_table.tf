@@ -5,5 +5,5 @@ resource "aws_route_table" "route_table" {
         nat_gateway_id = var.nat_gateway_id
         gateway_id = var.gateway_id
     }
-    tags = var.tags
+    tags = merge(var.tags,{Name = var.name})
 }
