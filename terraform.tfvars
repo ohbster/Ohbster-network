@@ -6,12 +6,12 @@
 #The name to use for the resources
 name = "Ohbster-Network"
 #Set the region for the project
-region = "us-west-1"
+region = "us-east-1"
 #common tags to apply to resources
 common_tags = {
-        Environment = "dev"
-        Version = ".1"
-        Owner = "ohbster@protonmail.com"
+  Environment = "dev"
+  Version     = ".1"
+  Owner       = "ohbster@protonmail.com"
 }
 
 #######
@@ -34,6 +34,6 @@ instance_count = 5
 #If you want to ssh into instances, you must provide a valid key name
 #Remember the key pairs are regional
 #key_name = "<CHANGE ME TO A VALID KEYNAME IN THE REGION>"
-key_name = null 
+key_name = null
 #Below is the list of ports you are opening in your instance security groups
-port_list = [ 80,22,443 ]
+port_list = [80, 22, 443]
