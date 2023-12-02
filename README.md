@@ -8,6 +8,7 @@ This is a reusable terraform module that will
 - Build Instances and evenely distribute them among the public subnets
 - Name resources after the project name
 - Can change regions. (BEWARE!!! MUST DO A `terraform destroy` FIRST)  
+- Create IAM groups and users, give groups access to resouces created in terraform deployment
 
 How do you use it?  
   If you haven't already, you need to perform a   

@@ -54,20 +54,18 @@ iam_map = {
   "group_path" = "/TheoClass/"
 }
 
-#user_list = ["test_user","test_admin","test_contributer","test_member"]
+#Add users / groups to this map.
 group_list = {
   owners     = ["User1", "User2"]
   admins     = ["User3", "User4"]
   developers = ["User5"]
   users      = ["User6"]
 }
+
+#Add permissions / actions to the groups. Make sure they group names match the group list
 action_map = {
   owners     = ["ec2:StartInstances", "ec2:StopInstances", "ec2:RebootInstances", "ec2:TerminateInstances"]
   admins     = ["ec2:StartInstances", "ec2:StopInstances", "ec2:RebootInstances"]
   developers = ["ec2:StartInstances", "ec2:StopInstances"]
   users      = ["ec2:StartInstances"]
 }
-# groups = {
-#   group_name = "group_a"
-#   user_list = ["User1", "User2"]
-# }
