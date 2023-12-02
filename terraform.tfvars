@@ -6,7 +6,16 @@
 #The name to use for the resources
 name = "Ohbster-Network"
 #Set the region for the project
+regions = [ {
+  region = "us-east-1"
+  cidr = "10.51.0.0/16"
+},
+{
+  region = "us-west-2"
+  cidr = "10.52.0.0/16"
+} ]
 region = "us-east-1"
+region2 = "us-west-2"
 #common tags to apply to resources
 common_tags = {
   Environment = "dev"
@@ -37,3 +46,22 @@ instance_count = 5
 key_name = null
 #Below is the list of ports you are opening in your instance security groups
 port_list = [80, 22, 443]
+
+
+###IAM###
+iam_map = {
+  "group_name" = "TheoClass-grp"
+  "group_path" = "/TheoClass/"
+}
+
+user_list = ["test_user","test_admin","test_contributer","test_member"]
+group_list = {
+  group_a = ["User1", "User2"]
+  group_b = ["User3", "User4"]
+  group_c = ["User5"]
+  group_d = ["User6"]
+}
+# groups = {
+#   group_name = "group_a"
+#   user_list = ["User1", "User2"]
+# }
