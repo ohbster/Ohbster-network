@@ -4,3 +4,7 @@ output "public_ips" {
   ]
 
 }
+
+output "passwords" {
+  value = [for pw in module.iam_user_group : pw.password]
+}

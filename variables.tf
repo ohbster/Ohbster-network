@@ -14,7 +14,7 @@ variable "name" {
 variable "regions" {
   type = list(object({
     region = string
-    cidr = string
+    cidr   = string
   }))
   description = "Main regions"
 
@@ -110,24 +110,18 @@ variable "port_list" {
 }
 
 variable "iam_map" {
-  type = map(string)
+  type        = map(string)
   description = "AWS IAM Map"
 }
 
-variable "user_list" {
-  type = list(string)
-  description = "AWS User list"
-
-}
 variable "group_list" {
   type = map(list(string))
 }
+variable "action_map" {
+  type = map(list(string))
+}
 variable "path" {
-  type = string
+  type    = string
   default = null
 }
 
-# # variable ""
-# variable "user_group" {
-#   type = list(tuple())
-# }

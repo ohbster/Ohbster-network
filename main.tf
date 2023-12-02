@@ -7,13 +7,23 @@ terraform {
   }
 }
 provider "aws" {
-  alias = "region-1"
+  alias  = "region-1"
   region = var.region
 
 }
 provider "aws" {
-  alias = "region-2"
+  alias  = "region-2"
   region = var.region2
+}
+
+#This is used by mff_id tag. This is will identify all resources that belong to the terraform deployment
+resource "random_uuid" "uuid" {
+
+}
+
+#This will add the mff_id uuid to the common tags that get passed to resources. This will identify resources that belong to this deployment
+locals {
+  common_tags = merge(var.common_tags, { mff_id = random_uuid.uuid.result })
 }
 
 module "vpc-network" {
@@ -26,7 +36,7 @@ module "vpc-network" {
   cidr                 = var.cidr
   public_subnet_count  = var.public_subnet_count
   private_subnet_count = var.private_subnet_count
-  tags                 = var.common_tags
+  tags                 = local.common_tags
 
 }
 
@@ -41,7 +51,7 @@ module "vpc-network" {
 #   cidr                 = var.cidr
 #   public_subnet_count  = var.public_subnet_count
 #   private_subnet_count = var.private_subnet_count
-#   tags                 = var.common_tags
+#   tags = local.common_tags
 
 # }
 
@@ -50,7 +60,7 @@ module "ec2_instance_sg" {
   name      = var.name
   port_list = var.port_list
   vpc_id    = module.vpc-network.vpc_id
-  tags      = var.common_tags
+  tags      = local.common_tags
 }
 module "instance" {
   #The count will `instance_count` # of instances. Set this in the terraform.tfvar file
@@ -64,28 +74,17 @@ module "instance" {
   instance_type      = var.instance_type
   key_name           = var.key_name
   port_list          = var.port_list
-  tags               = var.common_tags
+  tags               = local.common_tags
   security_group_ids = [module.ec2_instance_sg.security_group_id]
 }
 
 module "iam_user_group" {
-  source = "./modules/iam_user_groups"
-  for_each = var.group_list
-  #group_list = var.group_list
-  #name = var.each.key
-  user_list = each.value
-  path = var.path
-  name = "${each.key}-grp"
-  tags = var.common_tags
+  source          = "./modules/iam_user_groups"
+  for_each        = var.group_list
+  user_list       = each.value
+  permission_list = var.action_map[each.key]
+  path            = var.path
+  name            = "${each.key}-grp"
+  tags            = local.common_tags
 }
 
-# module "iam_user" {
-#   #count = var.toggle_map.iam_toggle ? length(var.user_list) : 0
-#   source = "./modules/iam_user"
-#   for_each = var.group_list 
-#   group_name = each.key
-#   name = var.user_list[count.index]
-#   tags = var.common_tags
-#   #path = module.iam_group[0].path
-#   user_list = each.value
-# }
