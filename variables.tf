@@ -122,6 +122,9 @@ variable "iam_map" {
 variable "group_list" {
   type = map(list(string))
 }
+variable "permission_map" {
+  type = map(list(string))
+}
 variable "path" {
   type = string
   default = null

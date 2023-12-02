@@ -56,10 +56,16 @@ iam_map = {
 
 #user_list = ["test_user","test_admin","test_contributer","test_member"]
 group_list = {
-  group_a = ["User1", "User2"]
-  group_b = ["User3", "User4"]
-  group_c = ["User5"]
-  group_d = ["User6"]
+  owners = ["User1", "User2"]
+  admins = ["User3", "User4"]
+  developers = ["User5"]
+  users = ["User6"]
+}
+permission_map = {
+  owners =  ["ec2:StartInstances","ec2:StopInstances","ec2:RebootInstances","ec2:TerminateInstances"]
+  admins = ["ec2:StartInstances","ec2:StopInstances","ec2:RebootInstances"]
+  developers = ["ec2:StartInstances","ec2:StopInstances"]
+  users = ["ec2:StartInstances"]
 }
 # groups = {
 #   group_name = "group_a"

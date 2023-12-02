@@ -24,6 +24,39 @@ module "iam_group" {
   depends_on = [ module.iam_user ]
 }
 
+resource "aws_iam_group_policy" "group_policy" {
+  name = "${var.name}-policy"
+  group = var.name
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = "${var.permission_list}"
+        # Action = [
+        #   #"ec2:Describe*",
+        #   "ec2:StartInstances",
+        #   "ec2:StopInstances",
+        # ]
+        Effect   = "Allow"
+        Resource = "*"
+        Condition = {
+          "StringEquals" = {"aws:ResourceTag/mff_id" = "${var.tags["mff_id"]}"}
+        }
+      },
+   
+    {
+        Action = [
+          "ec2:Describe*",
+        ]
+        Effect   = "Allow"
+        Resource = "*"
+    }],
+  })
+
+  depends_on = [ module.iam_group ]
+}
+
+
 module "iam_memberships" {
   #count = length(var.user_list)
   source = "../base_modules/iam/iam_group_membership"
