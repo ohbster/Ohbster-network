@@ -114,11 +114,11 @@ variable "iam_map" {
   description = "AWS IAM Map"
 }
 
-variable "user_list" {
-  type = list(string)
-  description = "AWS User list"
+# variable "user_list" {
+#   type = list(string)
+#   description = "AWS User list"
 
-}
+# }
 variable "group_list" {
   type = map(list(string))
 }

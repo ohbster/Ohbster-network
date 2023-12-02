@@ -54,7 +54,7 @@ iam_map = {
   "group_path" = "/TheoClass/"
 }
 
-user_list = ["test_user","test_admin","test_contributer","test_member"]
+#user_list = ["test_user","test_admin","test_contributer","test_member"]
 group_list = {
   group_a = ["User1", "User2"]
   group_b = ["User3", "User4"]
