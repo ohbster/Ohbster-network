@@ -11,7 +11,21 @@ variable "name" {
   }
 }
 
+variable "regions" {
+  type = list(object({
+    region = string
+    cidr = string
+  }))
+  description = "Main regions"
+
+}
+
 variable "region" {
+  type        = string
+  description = "Main vpc region"
+}
+
+variable "region2" {
   type        = string
   description = "Main vpc region"
 }
@@ -95,3 +109,25 @@ variable "port_list" {
   default     = [80, 22]
 }
 
+variable "iam_map" {
+  type = map(string)
+  description = "AWS IAM Map"
+}
+
+variable "user_list" {
+  type = list(string)
+  description = "AWS User list"
+
+}
+variable "group_list" {
+  type = map(list(string))
+}
+variable "path" {
+  type = string
+  default = null
+}
+
+# # variable ""
+# variable "user_group" {
+#   type = list(tuple())
+# }
