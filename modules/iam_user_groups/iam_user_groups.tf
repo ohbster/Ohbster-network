@@ -69,7 +69,14 @@ module "iam_memberships" {
   depends_on = [ module.iam_group ]
 }
 
-resource "aws_iam_user_login_profile" "login" {
+# resource "aws_iam_user_login_profile" "login" {
+#   count = length(var.user_list)
+#   user = var.user_list[count.index]
+
+#   depends_on = [ module.iam_user ]
+# }
+module "login_profile" {
+  source = "../base_modules/iam/iam_user_login_profile"
   count = length(var.user_list)
   user = var.user_list[count.index]
 
