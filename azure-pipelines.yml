@@ -40,5 +40,5 @@ steps:
 - task: TerraformTaskV4@4
   inputs:
     provider: 'aws'
-    command: 'apply'
+    command: 'destroy'
     environmentServiceNameAWS: 'Terraform Service Connection'
