@@ -27,9 +27,6 @@ locals {
 }
 
 module "vpc-network" {
-  providers = {
-    aws = aws.region-1
-  }
   name                 = var.name
   source               = "./modules/network"
   region               = var.region
@@ -80,7 +77,7 @@ module "instance" {
 
 module "iam_user_group" {
   source          = "./modules/iam_user_groups"
-  for_each        = var.group_list
+  for_each        = var.group_map
   user_list       = each.value
   permission_list = var.action_map[each.key]
   path            = var.path
